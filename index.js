@@ -74,6 +74,7 @@ const appData = {
     }
   },
   chooseIncome: function () {
+    let items
     do {
       items = prompt(
         'Что принесет дополнительный доход? (Перечислите через запятую)',
