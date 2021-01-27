@@ -24,6 +24,13 @@ let startBtn = document.querySelector('#start'),
 
 let money, time
 
+let btns = document.querySelectorAll('button')
+btns.forEach((item) => {
+  if (item.id != 'start') {
+    item.disabled = true
+  }
+})
+
 startBtn.addEventListener('click', function () {
   time = prompt('Введите дату в формате YYYY-MM-DD', '')
   money = +prompt('Ваш бюджет на месяц, грн.:', '')
@@ -37,6 +44,10 @@ startBtn.addEventListener('click', function () {
   yearValue.value = new Date(Date.parse(time)).getFullYear()
   monthValue.value = new Date(Date.parse(time)).getMonth() + 1
   dayValue.value = new Date(Date.parse(time)).getDate()
+
+  btns.forEach((item) => {
+    item.disabled = false
+  })
 })
 
 expensesBtn.addEventListener('click', function () {
@@ -54,7 +65,7 @@ expensesBtn.addEventListener('click', function () {
       typeof b === 'number' &&
       a.length < 50
     ) {
-      console.log('done')
+      
       appData.expenses[a] = +b
       sum += +b
     } else {
@@ -62,6 +73,9 @@ expensesBtn.addEventListener('click', function () {
     }
   }
   expensesValue.textContent = sum
+  appData.budget -= sum
+  budgetValue.textContent = appData.budget
+
 })
 
 optionalExpensesBtn.addEventListener('click', function () {
