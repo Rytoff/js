@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   //****timer****
 
-  let deadLine = '2021-02-01'
+  let deadLine = '2021-02-02'
 
   function getTimeRemaining(endtime) {
     let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -58,12 +58,13 @@ window.addEventListener('DOMContentLoaded', function () {
 
     function updateClock() {
       let t = getTimeRemaining(endtime)
-      hours.textContent = (t.hours > 9 ? t.hours : '0' + t.hours)
-      minutes.textContent = (t.minutes > 9 ? t.minutes : '0' + t.minutes)
-      seconds.textContent = (t.seconds > 9 ? t.seconds : '0' + t.seconds)
+      hours.textContent = t.hours > 9 ? t.hours : '0' + t.hours
+      minutes.textContent = t.minutes > 9 ? t.minutes : '0' + t.minutes
+      seconds.textContent = t.seconds > 9 ? t.seconds : '0' + t.seconds
 
-      if(t.total<=0) {
+      if (t.total <= 0) {
         clearInterval(timeInterval)
+        hours.textContent = minutes.textContent = seconds.textContent = '00'
       }
     }
   }
@@ -73,15 +74,15 @@ window.addEventListener('DOMContentLoaded', function () {
   //****Modal****
 
   let more = document.querySelector('.more'),
-      overlay = document.querySelector('.overlay'),
-      close = document.querySelector('.popup-close')
-  
-  more.addEventListener('click', function() {
+    overlay = document.querySelector('.overlay'),
+    close = document.querySelector('.popup-close')
+
+  more.addEventListener('click', function () {
     overlay.style.display = 'block'
     this.classList.add('more-splash')
     document.body.style.overflow = 'hidden'
   })
-  close.addEventListener('click', function() {
+  close.addEventListener('click', function () {
     overlay.style.display = 'none'
     more.classList.remove('more-splash')
     document.body.style.overflow = ''
